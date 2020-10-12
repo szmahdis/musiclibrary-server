@@ -49,7 +49,7 @@ app.get('/songs', (req, res) => {
 app.get('/images/:filename', (req, res) => {
     const fileName = req.params.filename
 
-    fs.readFile(`./server/images/${fileName}`, (err, data) => {
+    fs.readFile(`./images/${fileName}`, (err, data) => {
         if (err) throw err;
         res.send(data);
       });
@@ -65,7 +65,7 @@ app.get('/images/:filename', (req, res) => {
 
 app.get('/audio/:trackId', (req,res) => {
     const trackId = req.params.trackId
-    res.sendFile(path.resolve(`./server/audio/${trackId}`))
+    res.sendFile(path.resolve(`./audio/${trackId}`))
     res.setHeader('Access-Control-Allow-Origin', '*');
     //todo send this to client and play it
 })
