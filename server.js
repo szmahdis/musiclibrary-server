@@ -66,7 +66,7 @@ app.get('/images/:filename', (req, res) => {
 app.get('/audio/:trackId', (req,res) => {
     const trackId = req.params.trackId
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.sendFile(path.resolve(`server/audio/${trackId}.mp3`))
+    res.sendFile(path.resolve(`./audio/${trackId}.mp3`))
 })
 
 app.listen(port, () => {
