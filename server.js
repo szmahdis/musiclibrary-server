@@ -42,10 +42,6 @@ app.get('/songs', (req, res) => {
 })
 
 
-//TODO bejaye songs, id ro bargadun ke efficient tar beshe
-// yani kole ahangaro bad nagardun, object ro bargardun.
-// /songs/:id 
-
 app.get('/images/:filename', (req, res) => {
     const fileName = req.params.filename
 
@@ -54,13 +50,6 @@ app.get('/images/:filename', (req, res) => {
         res.send(data);
       });
 
-    //   getImage(filename).then((data) => {
-    //     // kari ke ba data mishe anjam dad
-    //    res.send(data)
-    //    }).catch((err) => {
-    //    // `error mide
-    //    res.send('ERROR')
-    //    })
 })
 
 app.get('/audio/:trackId', (req,res) => {
