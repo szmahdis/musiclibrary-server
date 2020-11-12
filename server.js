@@ -8,10 +8,10 @@ const { MongoClient } = require('mongodb');
 
 const uri = "mongodb+srv://musiclibrary-server:7ZUxHXUb37YD851J@cluster0.u5jqa.mongodb.net/musiclibrary?retryWrites=true&w=majority";
 
-const client = new MongoClient(uri);
 
 app.get('/songs', async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*'); 
+    const client = new MongoClient(uri);
     await client.connect();
     
     const database = client.db('musiclibrary');
