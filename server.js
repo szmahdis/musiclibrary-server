@@ -3,42 +3,23 @@ const fs = require('fs')
 const app = express()
 const port = process.env.PORT || 5000
 const path = require('path')
-const songs = [
-    {
-        id: "s0000",
-        artist: "Paramore",
-        title: "Aint It Fun",
-        album: "Paramore",
-        cover: "paramore.jpg"
-    },
-    {
-        id: "s0001",
-        artist: "Florence + The Machine",
-        title: "Dog Days Are Over",
-        album: "Lungs",
-        cover: "florence_and_the_machine.jpg"
-    },
-    {
-        id: "s0002",
-        artist: "London Grammar",
-        title: "Wasting My Youngs Years",
-        album: "If You Wait",
-        cover: "london_grammar.jpg"
-    },
-
-    {
-        id: "s0003",
-        artist: "Hasan Shamaizadeh",
-        title: "Bishtar Bishtar",
-        album: "Khodafez",
-        cover: "shamaizadeh_khodahafez.jpg"
-    }
-]
+const { MongoClient } = require('mongodb'); 
 
 
-app.get('/songs', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*'); //Question what does this do?
-  res.json(songs)
+const uri = "mongodb+srv://musiclibrary-server:7ZUxHXUb37YD851J@cluster0.u5jqa.mongodb.net/musiclibrary?retryWrites=true&w=majority";
+
+const client = new MongoClient(uri);
+
+app.get('/songs', async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*'); 
+    await client.connect();
+    
+    const database = client.db('musiclibrary');
+    const collection = database.collection('songs');
+    const songs = await collection.find().toArray()
+    await client.close();
+    res.json(songs)
+    
 })
 
 
